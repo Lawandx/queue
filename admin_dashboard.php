@@ -13,10 +13,10 @@ $services = $conn->query("SELECT * FROM services");
 
 
 // Fetch all queue history
-$queue_history = $conn->query("SELECT q.queue_id, s.full_name, srv.service_name, se.employee_name, q.queue_time, q.status 
+$queue_history = $conn->query("SELECT q.queue_id, s.full_name, srv.service_name, se.employee_name, q.queue_time, q.status  
                                FROM queue q
                                JOIN students s ON q.student_id = s.student_id
-                               JOIN services srv ON q.service_id = srv.service_id
+                               JOIN services srv ON q.service_id = srv.service_id 
                                JOIN serviceemployee se ON q.employee_id = se.employee_id
                                ORDER BY q.queue_time DESC");
 

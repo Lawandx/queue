@@ -82,8 +82,8 @@ $employee = $stmt->get_result()->fetch_assoc();
         }
 
         .table-striped th {
-            background-color: #007bff;
-            color: white;
+            background-color: #F3B937;
+            color: black;
         }
 
         .table-striped tbody tr:hover {

@@ -78,8 +78,8 @@ $employee = $stmt->get_result()->fetch_assoc();
         }
 
         .table-striped th {
-            background-color: #007bff;
-            color: white;
+            background-color: #F3B937;
+            color: black;
         }
 
         .table-striped tbody tr:hover {
@@ -252,7 +252,7 @@ $employee = $stmt->get_result()->fetch_assoc();
             </div>
             <div class="nav-menu">
                 <ul>
-                    <li><a href="staff_dashboard.php" class="link active">Dashboard</a></li>
+                    <li><a href="staff_dashboard.php" class="link active">Queue</a></li>
                     <li><a href="queue_history.php" class="link">History</a></li>
                     <li><a href="logout.php" class="link">Logout</a></li>
                 </ul>
@@ -262,7 +262,7 @@ $employee = $stmt->get_result()->fetch_assoc();
             <div id="notification-box" class="notification"></div>
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="welcome-text">ยินดีต้อนรับ <?php echo htmlspecialchars($employee['employee_name']); ?></h1>
-                <button id="toggleNotificationBtn" class="btn btn-warning">เปิดการแจ้งเตือน</button>
+                <button id="toggleNotificationBtn" class="btn btn-success">เปิดการแจ้งเตือน</button>
             </div>
 
             <h2 class="text-dark mb-4">รายการคิวของคุณ</h2>

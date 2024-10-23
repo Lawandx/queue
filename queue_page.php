@@ -42,7 +42,6 @@ if ($today_date !== $last_checked_date) {
         body {
             margin: 0;
             color: #333;
-            font-family: 'Prompt', sans-serif;
             display: flex;
             flex-direction: column;
         }
@@ -52,7 +51,7 @@ if ($today_date !== $last_checked_date) {
         }
 
         .background {
-            background: linear-gradient(to right, #fff 50%, #b7c098 50%);
+            background: linear-gradient(to right, #fff 50%, #F3B937 50%);
         }
 
         .navbar-custom {
@@ -74,9 +73,10 @@ if ($today_date !== $last_checked_date) {
         }
 
         .register-section {
-            background-color: #b7c098;
+            background-color: #F3B937;
             /* สีพื้นหลังสำหรับส่วนลงทะเบียน */
             padding: 20px;
+            border-radius: 5px 0px 0px 5px;
 
         }
 
@@ -84,6 +84,8 @@ if ($today_date !== $last_checked_date) {
             background-color: #fff;
             /* สีพื้นหลังสำหรับส่วนคิว */
             padding: 20px;
+            border-radius: 0px 5px 5px 0px;
+
 
         }
 
@@ -125,8 +127,8 @@ if ($today_date !== $last_checked_date) {
             transform: scale(1.05);
         }
 
-        .service-card.active {
-            border: 2px solid #e0a800;
+        .service-card.active  {
+            border: 5px solid #d9251e;
         }
 
         .service-card .card-body {
@@ -275,6 +277,9 @@ if ($today_date !== $last_checked_date) {
                 <!-- จองคิวห้องวิชาการ -->
                 <div class="col-lg-6 col-md-12 mb-4 register-section">
                     <h2>จองคิวห้องวิชาการ</h2>
+                    <p class="text-danger">
+                        หมายเหตุ: หากท่านไม่มีรายชื่ออยู่ในคณะวิทยาศาสตร์ โปรดใส่รหัสนิสิต "00000000" ในช่องรหัสนิสิต
+                    </p>
                     <form id="queue-form">
                         <div class="mb-3">
                             <label for="student_id" class="form-label">รหัสนิสิต <i class="fas fa-info-circle"
@@ -502,7 +507,7 @@ if ($today_date !== $last_checked_date) {
                         if (calledQueues.length > 0) {
                             calledQueueBox.innerHTML = ''; // Clear previous content
                             calledQueues.forEach(queue => {
-                                const text = `ขอเชิญคิวที่ : ${queue.daily_queue_number} ${queue.full_name} ไป ${queue.service_name}`;
+                                const text = `ขอเชิญคิวที่  ${queue.daily_queue_number} ${queue.full_name} ไป ${queue.service_name}`;
                                 const p = document.createElement('p');
                                 p.textContent = text;
                                 calledQueueBox.appendChild(p);
@@ -552,7 +557,7 @@ if ($today_date !== $last_checked_date) {
             }
         }
 
-        function showErrorModal(message = 'เกิดข้อผิดพลาดในการจองคิว') {
+        function showErrorModal(message = 'ไม่พบข้อมูล') {
             const errorModalElement = document.getElementById('errorModal');
             if (errorModalElement) {
                 const errorModal = new bootstrap.Modal(errorModalElement);
@@ -567,7 +572,7 @@ if ($today_date !== $last_checked_date) {
         }
     </script>
 
-    
+
 </body>
 
 </html>
