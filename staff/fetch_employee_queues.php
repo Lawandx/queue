@@ -1,6 +1,11 @@
 <?php
 session_start();
-include 'db_connect.php';
+include '../db_connect.php';
+
+if (!isset($_SESSION['employee_id']) || $_SESSION['access_level'] !== 'employee') {
+    header("Location: ../login.php");
+    exit();
+}
 
 header('Content-Type: application/json');
 

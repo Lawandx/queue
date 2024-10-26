@@ -2,11 +2,9 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f0f2f5; /* Lighter background for better contrast */
   color: #333333; /* Darker text color for better readability */
   font-family: "Montserrat", sans-serif;
 }
-
 /* General Text Styles */
 .text-primary {
   color: #333333; /* Darker color for better readability */
@@ -267,6 +265,11 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #4f35a1;
 }
+
+.nav-link.active {
+  border-bottom: 2px solid orange;
+}
+
 
 /* Media Queries */
 /* Medium <= 992px */

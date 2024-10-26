@@ -2,12 +2,14 @@
 // daily_report.php
 
 session_start();
-include 'db_connect.php';
+include '../db_connect.php';
 
-if (!isset($_SESSION['employee_id'])) {
-    header("Location: login.php");
+// ตรวจสอบการเข้าสู่ระบบและสิทธิ์การเข้าถึง
+if (!isset($_SESSION['employee_id']) || $_SESSION['access_level'] !== 'admin') {
+    header("Location: ../login.php");
     exit();
 }
+
 
 $date = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d');
 
@@ -164,7 +166,7 @@ $total_queues = $total_queues_stmt->get_result()->fetch_assoc()['total'];
             </tbody>
         </table>
 
-        <a href="admin_dashboard.php" class="btn btn-secondary mt-3">กลับไปที่แดชบอร์ด</a>
+        <a href="dashboard.php" class="btn btn-secondary mt-3">กลับไปที่แดชบอร์ด</a>
         <a href="#" id="download-pdf" class="btn btn-primary mt-3">ดาวน์โหลด PDF</a>
     </div>
 

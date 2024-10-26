@@ -6,33 +6,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $loginInput = $_POST['loginInput'];
     $password = $_POST['password'];
 
-    // Determine if the input is an email or username
+    // ตรวจสอบว่าเป็นอีเมลหรือชื่อผู้ใช้
     if (filter_var($loginInput, FILTER_VALIDATE_EMAIL)) {
-        $stmt = $conn->prepare("SELECT * FROM serviceemployee WHERE email = ? AND password = ?");
+        $stmt = $conn->prepare("SELECT * FROM serviceemployee WHERE email = ?");
     } else {
-        $stmt = $conn->prepare("SELECT * FROM serviceemployee WHERE username = ? AND password = ?");
+        $stmt = $conn->prepare("SELECT * FROM serviceemployee WHERE username = ?");
     }
 
-    $stmt->bind_param("ss", $loginInput, $password);
+    $stmt->bind_param("s", $loginInput);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $employee = $result->fetch_assoc();
-        $_SESSION['employee_id'] = $employee['employee_id'];
-        $_SESSION['employee_name'] = $employee['employee_name'];
 
-        if ($employee['username'] === 'admin' || $employee['email'] === 'admin@gmail.com') {
-            header("Location: admin_dashboard.php");
+        // ตรวจสอบรหัสผ่าน
+        if ($employee['password'] === $password) {
+            $_SESSION['employee_id'] = $employee['employee_id'];
+            $_SESSION['employee_name'] = $employee['employee_name'];
+            $_SESSION['access_level'] = $employee['access_level'];
+
+            if ($employee['access_level'] === 'admin') {
+                header("Location: admin/dashboard.php");
+            } else if ($employee['access_level'] === 'employee') {
+                header("Location: staff/staff_dashboard.php");
+            } else {
+                // จัดการกรณีที่ระดับการเข้าถึงไม่ตรงกับที่กำหนด
+                $error = "Unknown access level.";
+            }
+            exit();
         } else {
-            header("Location: staff_dashboard.php");
+            $error = "Invalid password.";
         }
-        exit();
     } else {
         $error = "Invalid email/username or password.";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="th">

@@ -1,9 +1,9 @@
 <?php
 session_start();
-include 'db_connect.php';
+include '../db_connect.php';
 
-if (!isset($_SESSION['employee_id'])) {
-    header("Location: login.php");
+if (!isset($_SESSION['employee_id']) || $_SESSION['access_level'] !== 'employee') {
+    header("Location: ../login.php");
     exit();
 }
 
@@ -205,7 +205,7 @@ $employee = $stmt->get_result()->fetch_assoc();
     <div class="wrapper">
         <nav class="nav d-flex justify-content-between align-items-center">
             <div class="nav-logo">
-                <img src="SC_Naresuan.png" alt="Logo">
+                <img src="../assets/img/SC_Naresuan.png" alt="Logo">
             </div>
             <div class="nav-menu">
                 <ul>

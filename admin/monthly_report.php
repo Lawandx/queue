@@ -1,11 +1,13 @@
 <?php
 session_start();
-include 'db_connect.php';
+include '../db_connect.php';
 
-if (!isset($_SESSION['employee_id'])) {
-    header("Location: login.php");
+// ตรวจสอบการเข้าสู่ระบบและสิทธิ์การเข้าถึง
+if (!isset($_SESSION['employee_id']) || $_SESSION['access_level'] !== 'admin') {
+    header("Location: ../login.php");
     exit();
 }
+
 
 $month = isset($_GET['month']) ? $_GET['month'] : date('m');
 $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
@@ -191,7 +193,7 @@ $comparison_result = $comparison_counts->get_result()->fetch_assoc();
         <h1 class="text-center">รายงานสรุปรายเดือน - <?php echo "$month/$year"; ?></h1>
 
         <div class="btn-container">
-            <a href="admin_dashboard.php" class="btn btn-secondary">กลับไปที่แดชบอร์ด</a>
+            <a href="dashboard.php" class="btn btn-secondary">กลับไปที่แดชบอร์ด</a>
             <button id="downloadPDF" class="btn btn-primary">ดาวน์โหลดรายงานเป็น PDF</button>
         </div>
 
