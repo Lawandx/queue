@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";  
 $username = "root";  
-$password = "tuataw13"; 
+$password = ""; 
 $database = "queuing_system";  
 
 
